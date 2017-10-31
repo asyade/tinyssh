@@ -1,33 +1,32 @@
-use messages::MessageContainer;
 use messages::Messages;
 use lexer::Token;
 
+pub enum CmdNode {
+	Message(Messages),
+	Argument(String)
+}
+
 pub trait Parser {
-	fn parse_request(self) -> Option<MessageContainer>;
+	fn parse_request(self) -> Option<Vec<CmdNode>>;
 }
 
 impl Parser for Vec<Token> {
-	fn parse_request(self) -> Option<MessageContainer> {
-		let mut req_id: i32 = -1;
+	fn parse_request(self) -> Option<Vec<CmdNode>> {
+		let mut		cmd: Vec<CmdNode> = vec![];
 		for tk in self {
-			if req_id == -1 {
-				if let Token::Word(cmd_str) = tk {
-					req_id = match cmd_str.as_str() {
-						"sys" => Messages::ExecSysteme as i32,
-						"sysdump" => Messages::ExecSystemeDump as i32,
-						"fdump" => Messages::FileDump as i32,
-						"fpush" => Messages::FilePush as i32,
-						"close" => Messages::Exit as i32,
-						_ => -1
-					}
-				}
-				if req_id == Messages::Exit as i32 {
-					return Option::Some(MessageContainer { id: req_id, content: String::new() })					
-				}
+			if let Token::Word(cmd_str) = tk {
+				cmd.push(match cmd_str.as_str() {
+					"sys" => CmdNode::Message(Messages::ExecSysteme),
+					"sysdump" => CmdNode::Message(Messages::ExecSystemeDump),
+					"fdump" => CmdNode::Message(Messages::FileDump),
+					"fpush" => CmdNode::Message(Messages::FilePush),
+					"close" => CmdNode::Message(Messages::Exit),
+					_ => CmdNode::Argument(String::from(cmd_str.as_str()))
+				});
 			}
-			else if let Token::Word(cmd_str) = tk{
-				return Option::Some(MessageContainer { id: req_id, content:  cmd_str})
-			}
+		}
+		if cmd.len() > 0 {
+			return Option::Some(cmd)
 		}
 		Option::None
 	}

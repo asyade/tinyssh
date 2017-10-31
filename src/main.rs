@@ -8,6 +8,7 @@ mod lexer;
 mod parser;
 mod server_handlers;
 mod client_handlers;
+mod interpretor;
 
 /*#[macro_use]
 extern crate serde_derive;*/

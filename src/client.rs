@@ -6,12 +6,13 @@ use lexer::Tokenizer;
 use parser::Parser;
 use client_handlers::client_handle_messages;
 use std::io::{self, Write};
+use interpretor::*;
 
 fn		parse_cmd(stream: &mut MessageStream, cmd: String) -> bool{
 	let tokens = cmd.tokenize();
 	match tokens.parse_request() {
 		Some(msg) => {
-			stream.send_message(msg);
+			msg.intepret(stream);
 			true
 		},
 		None => {
