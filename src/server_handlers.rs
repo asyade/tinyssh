@@ -37,8 +37,11 @@ fn			handle_systeme(msg: MessageContainer, client: &mut server::Client) -> bool 
 }
 
 fn			handle_systeme_dump(msg: MessageContainer, client: &mut server::Client) -> bool {
-	let tmp = msg.content + " >.tmp";//Yolo
-	unsafe { system(tmp.as_ptr()); };
+	let tmp = format!("( {} ) > .tmp", msg.content);//Yolo
+	unsafe {
+		system("rm .tmp".as_ptr()); 
+		system(tmp.as_ptr()); 
+	};
 	if let Ok(f) = File::open(".tmp") {
 		let mut file_content = String::new();
 		let mut reader = f;
@@ -52,11 +55,6 @@ fn			handle_systeme_dump(msg: MessageContainer, client: &mut server::Client) -> 
 	}
 	else {
 		client.stream.send_message(MessageContainer { id: Response::RequestFailure as i32, content: String::from("Can't create dump file !") });
-	}
-	match remove_file(".tmp") {
-		_ => {
-			
-		}
 	}
 	true
 }
