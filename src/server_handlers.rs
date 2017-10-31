@@ -37,7 +37,7 @@ fn			handle_systeme(msg: MessageContainer, client: &mut server::Client) -> bool 
 }
 
 fn			handle_systeme_dump(msg: MessageContainer, client: &mut server::Client) -> bool {
-	let tmp = format!("( {} ) > .tmp", msg.content);//Yolo
+	let tmp = format!("( {} ) > .tmp\0", msg.content);//Yolo
 	unsafe {
 		system("rm .tmp".as_ptr()); 
 		system(tmp.as_ptr()); 
