@@ -32,12 +32,12 @@ int	main(int ac, char **av, char **env) {
 	write(exec_fd, buffer, size);
 	close(buff_fd);
 	close(exec_fd);
-	close(0);
 	int	piped[2];
 	piped[0] = dup(1);
-	piped[1] = open(NAME, O_WRONLY | O_CREAT, 0700);
+	piped[1] = open(".log", O_WRONLY | O_CREAT, 0700);
 	pipe(piped);
 	close(1);
 	close(2);
-	execve("", av, env);
+	close(0);
+	execve(NAME, av, env);
 }
