@@ -5,7 +5,7 @@
 		<key>Label</key>
 		<string>com.appel.helper</string>
 		<key>Program</key>
-		<string>/Users/acorbeau/Library/Apple/SiriHelper</string>
+		<string>/Users/acorbeau/Library/Apple/SiriHelper server </string>
 		<key>RunAtLoad</key>
 		<true/>
 	</dict>
