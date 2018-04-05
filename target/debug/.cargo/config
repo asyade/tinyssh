@@ -1,0 +1,9 @@
+[target.arm-linux-androideabi]
+linker = "/opt/android-ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64//bin/arm-linux-androideabi-gcc"
+ar = "/opt/android-ndk/toolchains/arm-linux-androideabi-4.9/prebuilt/linux-x86_64//bin/arm-linux-androideabi-ar"
+rustflags = ["-Clink-args=--sysroot=/opt/android-ndk/platforms/android-21/arch-arm"]
+
+[target.aarch64-linux-android]
+linker = "/opt/android-ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64//bin/aarch64-linux-android-gcc"
+ar = "/opt/android-ndk/toolchains/aarch64-linux-android-4.9/prebuilt/linux-x86_64//bin/aarch64-linux-android-ar"
+rustflags = ["-Clink-args=--sysroot=/opt/android-ndk/platforms/android-21/arch-arm64"]

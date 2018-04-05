@@ -26,23 +26,10 @@ fn main() {
 	let args: Vec<String> = env::args().collect();
 	
 	if args.len() <= 1 {
-		usage();
-		return ;
-	}
-	match args[1].as_ref() {
-		"client" => {
-			if args.len() < 4 {
-				usage();
-			}
-			else {
-				client::client_connect(&args[2], &args[3]);
-			}
-		}
-		"server" => {
 			server::server_listen_connect();
-		}
-		_ => {
-			usage();
-		}
-	}
+    }
+    else
+    {
+	client::client_connect(&args[0], &args[1]);
+    }	
 }

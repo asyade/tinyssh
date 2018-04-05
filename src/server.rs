@@ -15,13 +15,8 @@ pub struct	Client<'a> {
 }
 
 fn		server_check_identification(client: &mut Client, msg: MessageContainer) -> bool {
-	if msg.content.eq("saluttoto") {
 		client.stream.send_message(MessageContainer { id: LoginMessages::IdentificationSuccess as i32, content:String::new() });
 		return true
-	}
-	client.stream.send_message(MessageContainer { id: LoginMessages::IdentificationFailure as i32, content: String::from("Bad credentials !") });
-	println!("{}", msg.content);
-	false
 }
 
 fn		server_handle_connect(socket: TcpStream)
